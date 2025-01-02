@@ -1,0 +1,164 @@
+{
+    "name": "futuremotion-toolbox",
+    "displayName": "Futuremotion Toolbox",
+    "description": "My own personal commands.",
+    "publisher": "Futuremotion",
+    "version": "1.0.1",
+    "icon": "./img/extensionIcon.png",
+    "readme": "README.md",
+    "author": {
+        "name": "Futuremotion"
+    },
+    "galleryBanner": {
+        "color": "#CED1D4",
+        "theme": "light"
+    },
+    "license": "MIT",
+    "licenses": [
+        {
+            "type": "MIT"
+        }
+    ],
+    "homepage": "https://github.com/futuremotiondev/vscode-futuremotion-toolbox",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/futuremotiondev/vscode-futuremotion-toolbox",
+        "docs": "https://github.com/futuremotiondev/vscode-futuremotion-toolbox/blob/main/README.md"
+    },
+    "bugs": {
+        "url": "https://github.com/futuremotiondev/vscode-futuremotion-toolbox/issues"
+    },
+    "engines": {
+        "vscode": "^1.96.0"
+    },
+    "categories": [
+        "Formatters",
+        "Testing",
+        "Other"
+    ],
+    "activationEvents": [],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "fm-toolbox.removeLineBreaksInSelection",
+                "title": "Remove Line Breaks in Selection",
+                "category": "Formatting"
+            },
+            {
+                "command": "fm-toolbox.removeEmptyLinesInDocument",
+                "title": "Remove Blank Lines in Document",
+                "category": "Formatting"
+            },
+            {
+                "command": "fm-toolbox.removeEmptyLinesInSelection",
+                "title": "Remove Blank Lines in Selection",
+                "category": "Formatting"
+            },
+            {
+                "command": "fm-toolbox.alignSelectionBySpaces",
+                "title": "Align Selection By Spaces",
+                "category": "Formatting"
+            },
+            {
+                "command": "fm-toolbox.compactSelectedCSS",
+                "title": "Compact Selected CSS",
+                "category": "Modify CSS"
+            },
+            {
+                "command": "fm-toolbox.expandSelectedCSS",
+                "title": "Expand Selected CSS",
+                "category": "Modify CSS"
+            }
+        ],
+        "configuration": {
+            "title": "Futuremotion Toolbox",
+            "properties": {
+                "fm-toolbox.allowedNumberOfEmptyLines": {
+                    "type": "integer",
+                    "default": 0,
+                    "maximum": 100,
+                    "scope": "language-overridable",
+                    "description": "Remove Empty Lines: Number of allowed consecutive empty lines."
+                }
+            }
+        },
+        "menus": {
+            "commandPalette": [
+                {
+                    "command": "fm-toolbox.removeLineBreaksInSelection",
+                    "when": "editorTextFocus && editorHasSelection"
+                },
+                {
+                    "command": "fm-toolbox.removeEmptyLinesInDocument",
+                    "when": "editorTextFocus"
+                },
+                {
+                    "command": "fm-toolbox.removeEmptyLinesInSelection",
+                    "when": "editorTextFocus && editorHasSelection"
+                },
+                {
+                    "command": "fm-toolbox.alignSelectionBySpaces",
+                    "when": "editorTextFocus && editorHasSelection"
+                },
+                {
+                    "command": "fm-toolbox.compactSelectedCSS",
+                    "when": "editorTextFocus && resourceLangId == css"
+                },
+                {
+                    "command": "fm-toolbox.expandSelectedCSS",
+                    "when": "editorTextFocus && resourceLangId == css"
+                }
+            ],
+            "editor/context": [
+                {
+                    "when": "editorTextFocus",
+                    "command": "fm-toolbox.removeLineBreaksInSelection",
+                    "group": "1TextFormatting@1"
+                },
+                {
+                    "when": "editorTextFocus",
+                    "command": "fm-toolbox.removeEmptyLinesInSelection",
+                    "group": "1TextFormatting@3"
+                },
+                {
+                    "when": "editorTextFocus",
+                    "command": "fm-toolbox.alignSelectionBySpaces",
+                    "group": "1TextFormatting@4"
+                },
+                {
+                    "when": "editorTextFocus && resourceLangId == css",
+                    "command": "fm-toolbox.compactSelectedCSS",
+                    "group": "1css@1"
+                },
+                {
+                    "when": "editorTextFocus && resourceLangId == css",
+                    "command": "fm-toolbox.expandSelectedCSS",
+                    "group": "1css@2"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "package": "npm run compile && mkdir build && vsce package -o ./build/fm-toolbox.vsix",
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src",
+        "test": "vscode-test"
+    },
+    "devDependencies": {
+        "@types/mocha": "^10.0.10",
+        "@types/node": "20.x",
+        "@types/vscode": "^1.96.0",
+        "@typescript-eslint/eslint-plugin": "^8.19.0",
+        "@typescript-eslint/parser": "^8.19.0",
+        "@vscode/test-electron": "^2.4.1",
+        "@vscode/vsce": "^3.2.1",
+        "eslint": "^9.17.0",
+        "glob": "^11.0.0",
+        "ts-loader": "^9.5.1",
+        "typescript": "^5.7.2"
+    }
+}
