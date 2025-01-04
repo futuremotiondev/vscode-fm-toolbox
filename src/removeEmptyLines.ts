@@ -1,8 +1,4 @@
-import * as vscode from 'vscode';
-import {
-	commands, Disposable, ExtensionContext, Range, TextDocument, TextDocumentSaveReason,
-	TextEditor, Uri, window, workspace, WorkspaceEdit
-} from 'vscode';
+import { Range, TextDocument, TextEditor, Uri, workspace, WorkspaceEdit } from 'vscode';
 import { IRange } from './extension';
 import { getExtensionConfig } from './extensionConfig';
 import { isEditor } from './util';

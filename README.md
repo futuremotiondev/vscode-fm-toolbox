@@ -11,6 +11,12 @@ Futuremotion Toolbox is a general text formatting utility that implements some s
 
 Search for `futuremotion-toolbox` in the Visual Studio Marketplace. Click on Install.
 
+## Release v1.0.3
+
+- Function to wrap Powershell arrays to a configured character width.
+- Function to wrap Powershell arrays to the first defined ruler.
+- Function to wrap Powershell arrays to a manually specified width.
+
 ## Release v1.0.2
 
 - Remove empty lines in the document.

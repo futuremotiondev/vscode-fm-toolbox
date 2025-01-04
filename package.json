@@ -3,7 +3,7 @@
     "displayName": "Futuremotion Toolbox",
     "description": "My own personal commands.",
     "publisher": "Futuremotion",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "icon": "./img/extensionIcon.png",
     "readme": "README.md",
     "author": {
@@ -19,14 +19,14 @@
             "type": "MIT"
         }
     ],
-    "homepage": "https://github.com/futuremotiondev/vscode-futuremotion-toolbox",
+    "homepage": "https://github.com/futuremotiondev/vscode-fm-toolbox",
     "repository": {
         "type": "git",
-        "url": "https://github.com/futuremotiondev/vscode-futuremotion-toolbox",
-        "docs": "https://github.com/futuremotiondev/vscode-futuremotion-toolbox/blob/main/README.md"
+        "url": "https://github.com/futuremotiondev/vscode-fm-toolbox",
+        "docs": "https://github.com/futuremotiondev/vscode-fm-toolbox/blob/main/README.md"
     },
     "bugs": {
-        "url": "https://github.com/futuremotiondev/vscode-futuremotion-toolbox/issues"
+        "url": "https://github.com/futuremotiondev/vscode-fm-toolbox/issues"
     },
     "engines": {
         "vscode": "^1.96.0"
@@ -42,74 +42,42 @@
         "commands": [
             {
                 "command": "fm-toolbox.removeLineBreaksInSelection",
-                "title": "Remove Line Breaks in Selection",
-                "category": "Formatting"
+                "title": "Remove Line Breaks in Selection"
             },
             {
                 "command": "fm-toolbox.removeEmptyLinesInDocument",
-                "title": "Remove Blank Lines in Document",
-                "category": "Formatting"
+                "title": "Remove Blank Lines in Document"
             },
             {
                 "command": "fm-toolbox.removeEmptyLinesInSelection",
-                "title": "Remove Blank Lines in Selection",
-                "category": "Formatting"
+                "title": "Remove Blank Lines in Selection"
             },
             {
                 "command": "fm-toolbox.alignSelectionBySpaces",
-                "title": "Align Selection By Spaces",
-                "category": "Formatting"
+                "title": "Align Selection By Spaces"
+            },
+            {
+                "command": "fm-toolbox.wrapPowershellArrayConfig",
+                "title": "Wrap Powershell Array to Configured Width"
+            },
+            {
+                "command": "fm-toolbox.wrapPowershellArraySpecified",
+                "title": "Wrap Powershell Array to Specified Width"
+            },
+            {
+                "command": "fm-toolbox.wrapPowershellArrayFirstRuler",
+                "title": "Wrap Powershell Array to First Ruler"
             },
             {
                 "command": "fm-toolbox.compactSelectedCSS",
-                "title": "Compact Selected CSS",
-                "category": "Modify CSS"
+                "title": "Compact Selected CSS"
             },
             {
                 "command": "fm-toolbox.expandSelectedCSS",
-                "title": "Expand Selected CSS",
-                "category": "Modify CSS"
+                "title": "Expand Selected CSS"
             }
         ],
-        "configuration": {
-            "title": "Futuremotion Toolbox",
-            "properties": {
-                "fm-toolbox.allowedNumberOfEmptyLines": {
-                    "type": "integer",
-                    "default": 0,
-                    "maximum": 100,
-                    "scope": "language-overridable",
-                    "description": "Remove Empty Lines: Number of allowed consecutive empty lines."
-                }
-            }
-        },
         "menus": {
-            "commandPalette": [
-                {
-                    "command": "fm-toolbox.removeLineBreaksInSelection",
-                    "when": "editorTextFocus && editorHasSelection"
-                },
-                {
-                    "command": "fm-toolbox.removeEmptyLinesInDocument",
-                    "when": "editorTextFocus"
-                },
-                {
-                    "command": "fm-toolbox.removeEmptyLinesInSelection",
-                    "when": "editorTextFocus && editorHasSelection"
-                },
-                {
-                    "command": "fm-toolbox.alignSelectionBySpaces",
-                    "when": "editorTextFocus && editorHasSelection"
-                },
-                {
-                    "command": "fm-toolbox.compactSelectedCSS",
-                    "when": "editorTextFocus && resourceLangId == css"
-                },
-                {
-                    "command": "fm-toolbox.expandSelectedCSS",
-                    "when": "editorTextFocus && resourceLangId == css"
-                }
-            ],
             "editor/context": [
                 {
                     "when": "editorTextFocus",
@@ -119,24 +87,54 @@
                 {
                     "when": "editorTextFocus",
                     "command": "fm-toolbox.removeEmptyLinesInSelection",
+                    "group": "1TextFormatting@2"
+                },
+                {
+                    "when": "editorTextFocus && editorLangId == powershell",
+                    "command": "fm-toolbox.wrapPowershellArrayConfig",
                     "group": "1TextFormatting@3"
                 },
                 {
-                    "when": "editorTextFocus",
-                    "command": "fm-toolbox.alignSelectionBySpaces",
+                    "when": "editorTextFocus && editorLangId == powershell",
+                    "command": "fm-toolbox.wrapPowershellArrayFirstRuler",
                     "group": "1TextFormatting@4"
                 },
                 {
-                    "when": "editorTextFocus && resourceLangId == css",
+                    "when": "editorTextFocus && editorLangId == powershell",
+                    "command": "fm-toolbox.wrapPowershellArraySpecified",
+                    "group": "1TextFormatting@5"
+                },
+                {
+                    "when": "editorTextFocus && editorLangId == css",
                     "command": "fm-toolbox.compactSelectedCSS",
                     "group": "1css@1"
                 },
                 {
-                    "when": "editorTextFocus && resourceLangId == css",
+                    "when": "editorTextFocus && editorLangId == css",
                     "command": "fm-toolbox.expandSelectedCSS",
                     "group": "1css@2"
                 }
             ]
+        },
+        "configuration": {
+            "title": "Futuremotion Toolbox",
+            "properties": {
+                "fm-toolbox.allowedNumberOfEmptyLines": {
+                    "type": "integer",
+                    "default": 0,
+                    "maximum": 100,
+                    "scope": "language-overridable",
+                    "description": "Remove Empty Lines: Number of allowed consecutive empty lines."
+                },
+                "fm-toolbox.powershellArrayWrapWidth": {
+                    "type": "integer",
+                    "default": 100,
+                    "minimum": 30,
+                    "maximum": 400,
+                    "scope": "language-overridable",
+                    "description": "Default character width to wrap Powershell arrays"
+                }
+            }
         }
     },
     "scripts": {

@@ -146,3 +146,5 @@ dist
 .vscode
 package-lock.json
 test/
+package-not-working.json
+build
